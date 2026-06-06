@@ -119,6 +119,19 @@ body{font-family:'Impact','Arial Black',system-ui,sans-serif;background:#0d0d0d;
   color:#3a3a3a;
 }
 
+/* ── FORMULARIO ── */
+.form-section{padding:28px 16px 32px;max-width:360px;margin:0 auto}
+.form-title{font-size:clamp(18px,5vw,22px);color:#00d4ff;text-transform:uppercase;letter-spacing:2px;text-align:center;margin-bottom:4px}
+.form-sub{font-size:12px;color:#555;text-align:center;font-family:'Segoe UI',sans-serif;margin-bottom:20px}
+.field{margin-bottom:12px}
+.field input{width:100%;background:#111;border:1px solid #222;border-radius:6px;padding:14px 16px;color:#fff;font-size:15px;outline:none;font-family:'Segoe UI',sans-serif;transition:border-color .15s}
+.field input:focus{border-color:#00d4ff55}
+.field input.err{border-color:#ff4444}
+.f-error{font-size:11px;color:#ff4444;font-family:'Segoe UI',sans-serif;display:none;margin-top:4px;padding-left:4px}
+.f-error.visible{display:block}
+.btn-participar{width:100%;background:#25d366;color:#fff;border:none;border-radius:6px;padding:16px;font-size:17px;font-weight:700;cursor:pointer;font-family:'Segoe UI',sans-serif;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 0 24px #25d36644;transition:all .15s;margin-top:4px}
+.btn-participar:hover{background:#1db954;transform:translateY(-1px)}
+
 /* ── FOOTER ── */
 footer{border-top:1px solid #1a1a1a;padding:24px 20px 36px;text-align:center;color:#2a2a2a;font-size:11px;font-family:'Segoe UI',sans-serif}
 footer .ft-brand{color:#444;font-weight:700;margin-bottom:10px;font-size:12px}
@@ -132,7 +145,7 @@ footer .ft-legal{color:#2a2a2a;font-size:10px}
 <!-- HERO -->
 <div class="hero">
   <div class="logo-wrap">
-    <img src="logo2.png" alt="Plutón 7 Bombos" class="logo-img"
+    <img src="Logo2.png" alt="Plutón 7 Bombos" class="logo-img"
          onerror="this.style.display='none';document.getElementById('lf').style.display='flex'"/>
     <div class="logo-fallback" id="lf" style="display:none">🥁</div>
   </div>
@@ -206,6 +219,26 @@ footer .ft-legal{color:#2a2a2a;font-size:10px}
   <div class="num-grid" id="num-grid"></div>
 </div>
 
+<!-- FORMULARIO -->
+<div class="form-section">
+  <div class="form-title">¿Querés participar?</div>
+  <div class="form-sub">Completá tus datos y te contactamos por WhatsApp</div>
+
+  <div class="field">
+    <input type="text" id="f-nombre" placeholder="Nombre y apellido *" autocomplete="name"/>
+    <span class="f-error" id="err-nombre">Ingresá tu nombre y apellido</span>
+  </div>
+  <div class="field">
+    <input type="text" id="f-numeros" placeholder="Número/s que elegís (ej: 7, 23) *"/>
+    <span class="f-error" id="err-numeros">Ingresá al menos un número</span>
+  </div>
+
+  <button class="btn-participar" onclick="handleParticipar()">
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="white"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.47.668 4.784 1.832 6.77L2 30l7.438-1.944A13.93 13.93 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.4a11.37 11.37 0 01-5.8-1.592l-.414-.247-4.414 1.156 1.176-4.3-.27-.44A11.4 11.4 0 014.6 16C4.6 9.706 9.706 4.6 16 4.6S27.4 9.706 27.4 16 22.294 27.4 16 27.4zm6.24-8.56c-.342-.17-2.024-1-2.34-1.112-.316-.114-.546-.17-.776.17-.23.342-.888 1.112-1.09 1.342-.2.228-.4.256-.742.086-.342-.17-1.444-.532-2.75-1.696-1.016-.906-1.702-2.024-1.902-2.366-.2-.342-.022-.526.15-.696.154-.152.342-.4.512-.6.17-.2.228-.342.342-.57.114-.228.056-.428-.028-.598-.086-.17-.776-1.872-1.064-2.562-.28-.672-.564-.58-.776-.59l-.66-.012c-.228 0-.598.086-.912.428-.314.342-1.2 1.172-1.2 2.858s1.228 3.316 1.4 3.546c.17.228 2.416 3.688 5.854 5.172.818.354 1.456.566 1.954.724.82.262 1.568.224 2.158.136.658-.098 2.024-.826 2.31-1.624.284-.8.284-1.484.2-1.626-.086-.14-.314-.228-.656-.4z"/></svg>
+    Quiero participar
+  </button>
+</div>
+
 <!-- FOOTER -->
 <footer>
   <div class="ft-brand">Plutón 7 Bombos</div>
@@ -244,6 +277,39 @@ function buildGrid(){
   }
 }
 buildGrid();
+
+function handleParticipar(){
+  const nombre  = document.getElementById('f-nombre').value.trim();
+  const numeros = document.getElementById('f-numeros').value.trim();
+  let ok = true;
+
+  if(!nombre){
+    document.getElementById('f-nombre').classList.add('err');
+    document.getElementById('err-nombre').classList.add('visible');
+    ok = false;
+  } else {
+    document.getElementById('f-nombre').classList.remove('err');
+    document.getElementById('err-nombre').classList.remove('visible');
+  }
+
+  if(!numeros){
+    document.getElementById('f-numeros').classList.add('err');
+    document.getElementById('err-numeros').classList.add('visible');
+    ok = false;
+  } else {
+    document.getElementById('f-numeros').classList.remove('err');
+    document.getElementById('err-numeros').classList.remove('visible');
+  }
+
+  if(!ok) return;
+
+  const msg = encodeURIComponent(
+    '🥁 ¡Hola! Soy ' + nombre + '\n' +
+    'y elegí el/los número/s ' + numeros + '\n' +
+    'para el sorteo del Bombo Artesanal Plutón 7 🎟️'
+  );
+  window.open('https://wa.me/5492262618471?text=' + msg, '_blank');
+}
 </script>
 </body>
 </html>
