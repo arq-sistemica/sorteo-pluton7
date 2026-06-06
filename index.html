@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sorteo Día del Padre · Plutón 7 Bombos</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Impact','Arial Black',system-ui,sans-serif;background:#0d0d0d;color:#fff;min-height:100vh;overflow-x:hidden}
+
+/* ── HERO ── */
+.hero{
+  position:relative;
+  background:#0d0d0d url('logo3 (2).png') center/cover no-repeat;
+  text-align:center;
+  padding:36px 20px 40px;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 50% 0%,#00d4ff1a 0%,transparent 60%),
+    linear-gradient(to bottom,#0d0d0d55 0%,#0d0d0dcc 100%);
+  pointer-events:none;
+}
+
+.logo-wrap{margin-bottom:14px;position:relative;z-index:1}
+.logo-img{width:190px;height:190px;border-radius:50%;object-fit:cover;box-shadow:0 0 40px #00d4ff33;animation:heartbeat 2.4s ease-in-out infinite}
+@keyframes heartbeat{
+  0%  {transform:scale(1)}      /* beat 1 — silencio */
+  33% {transform:scale(1)}      /* beat 2 — arranca */
+  40% {transform:scale(1.06)}   /* beat 2 — pulso */
+  48% {transform:scale(1)}      /* beat 2 — baja */
+  66% {transform:scale(1)}      /* beat 3 — arranca */
+  73% {transform:scale(1.05)}   /* beat 3 — pulso */
+  81% {transform:scale(1)}      /* beat 3 — baja */
+  100%{transform:scale(1)}      /* pausa hasta siguiente ciclo */
+}
+.logo-fallback{width:190px;height:190px;border-radius:50%;background:#1a1a1a;border:3px solid #00d4ff44;display:flex;align-items:center;justify-content:center;font-size:60px;margin:0 auto}
+
+.tag-gana{font-size:clamp(28px,7vw,52px);letter-spacing:2px;color:#fff;text-transform:uppercase;margin-bottom:2px;position:relative;z-index:1;animation:slideUp .8s ease both}
+.title-bombo{font-size:clamp(52px,14vw,96px);line-height:.92;color:#00d4ff;text-transform:uppercase;letter-spacing:-1px;text-shadow:0 0 40px #00d4ffaa;position:relative;z-index:1;animation:slideUp .8s ease .15s both, glowPulse 3s ease-in-out 1s infinite}
+.title-sub{font-size:clamp(28px,7vw,52px);color:#fff;text-transform:uppercase;letter-spacing:2px;position:relative;z-index:1;margin-bottom:20px;animation:slideUp .8s ease .3s both}
+
+.prize-strip{display:inline-block;background:#ffffff0a;border:1px solid #ffffff18;border-radius:6px;padding:12px 24px;margin-bottom:22px;position:relative;z-index:1}
+.prize-name{font-size:clamp(14px,3.5vw,19px);color:#fff;letter-spacing:1px;text-transform:uppercase}
+.prize-sub{font-size:13px;color:#aaa;font-family:'Segoe UI',sans-serif;margin-top:3px}
+
+.chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;position:relative;z-index:1}
+.chip{background:#ffffff08;border:1px solid #ffffff18;border-radius:4px;padding:8px 14px;text-align:center}
+.chip-lbl{font-size:9px;color:#777;letter-spacing:2px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;margin-bottom:2px}
+.chip-val{font-size:clamp(18px,4.5vw,26px);color:#f5d020;font-family:'Impact',sans-serif;animation:goldPulse 2.8s ease-in-out infinite}
+.chip-desc{font-size:11px;color:#999;font-family:'Segoe UI',sans-serif}
+.chip.cyan .chip-val{color:#00d4ff}
+
+.countdown-section{margin-bottom:22px;position:relative;z-index:1}
+.cd-label{font-size:10px;color:#666;letter-spacing:3px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;margin-bottom:8px}
+.countdown{display:flex;gap:8px;justify-content:center}
+.cd-box{background:#111;border:1px solid #00d4ff2a;border-radius:4px;padding:10px 12px;min-width:54px;text-align:center}
+.cd-num{font-size:clamp(20px,5vw,28px);color:#00d4ff;line-height:1;text-shadow:0 0 10px #00d4ff55;font-family:'Impact',sans-serif}
+.cd-lbl{font-size:9px;color:#555;letter-spacing:2px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;margin-top:2px}
+
+.bonus{background:#ffffff06;border:1px dashed #00d4ff33;border-radius:6px;padding:14px 18px;max-width:380px;margin:0 auto 24px;text-align:left;position:relative;z-index:1}
+.bonus-title{font-size:11px;color:#00d4ff;letter-spacing:3px;text-transform:uppercase;font-family:'Segoe UI',sans-serif;font-weight:700;margin-bottom:8px;text-align:center}
+.bonus-body{font-size:13px;color:#aaa;font-family:'Segoe UI',sans-serif;line-height:1.9}
+.bonus-body b{color:#fff}
+.bonus-body .hl{color:#f5d020;font-weight:700}
+
+.btn-wa{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;border:none;border-radius:6px;padding:16px 36px;font-size:17px;font-weight:700;cursor:pointer;text-decoration:none;letter-spacing:.5px;font-family:'Segoe UI',sans-serif;box-shadow:0 0 28px #25d36655;position:relative;z-index:1;transition:all .15s}
+.btn-wa:hover{background:#1db954;transform:translateY(-2px)}
+.hero-note{font-size:12px;color:#555;margin-top:10px;font-family:'Segoe UI',sans-serif;position:relative;z-index:1}
+
+/* ── ANIMACIONES ── */
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes glowPulse{
+  0%,100%{text-shadow:0 0 40px #00d4ffaa, 0 0 80px #00d4ff44}
+  50%{text-shadow:0 0 60px #00d4ffff, 0 0 120px #00d4ff99, 0 0 180px #00d4ff44}
+}
+@keyframes goldPulse{
+  0%,100%{opacity:1}
+  50%{opacity:.65}
+}
+
+/* ── DIVIDER ── */
+.divider{height:2px;background:linear-gradient(90deg,transparent,#00d4ff33,transparent)}
+
+/* ── GRID SECTION ── */
+.grid-section{padding:28px 16px 40px;max-width:360px;margin:0 auto}
+.section-title{font-size:clamp(18px,5vw,24px);color:#00d4ff;text-transform:uppercase;letter-spacing:3px;text-align:center;margin-bottom:4px}
+.section-sub{font-size:12px;color:#555;text-align:center;font-family:'Segoe UI',sans-serif;margin-bottom:20px}
+
+.legend{display:flex;gap:20px;justify-content:center;margin-bottom:18px}
+.leg-item{display:flex;align-items:center;gap:7px;font-size:13px;color:#888;font-family:'Segoe UI',sans-serif}
+.leg-dot{width:16px;height:16px;border-radius:4px;flex-shrink:0}
+.leg-dot.available{background:#0f1e2d;border:1px solid #00d4ff55}
+.leg-dot.taken{background:#2a2a2a;border:1px solid #444}
+
+/* Grilla 10x10 compacta */
+.num-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.num-cell{
+  aspect-ratio:1;
+  display:flex;align-items:center;justify-content:center;
+  font-size:clamp(9px,2.5vw,13px);
+  font-family:'Segoe UI',sans-serif;
+  font-weight:700;
+  border-radius:4px;
+  border:1px solid #00d4ff33;
+  background:#0f1e2d;
+  color:#00d4ff;
+  cursor:default;
+  user-select:none;
+}
+.num-cell.taken{
+  background:#1e1e1e;
+  border-color:#333;
+  color:#3a3a3a;
+}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid #1a1a1a;padding:24px 20px 36px;text-align:center;color:#2a2a2a;font-size:11px;font-family:'Segoe UI',sans-serif}
+footer .ft-brand{color:#444;font-weight:700;margin-bottom:10px;font-size:12px}
+footer .ft-quote{color:#555;font-style:italic;font-size:13px;margin-bottom:4px;line-height:1.5}
+footer .ft-author{color:#3a3a3a;font-size:11px;letter-spacing:1px;margin-bottom:12px}
+footer .ft-legal{color:#2a2a2a;font-size:10px}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="logo-wrap">
+    <img src="logo2.png" alt="Plutón 7 Bombos" class="logo-img"
+         onerror="this.style.display='none';document.getElementById('lf').style.display='flex'"/>
+    <div class="logo-fallback" id="lf" style="display:none">🥁</div>
+  </div>
+
+  <div class="tag-gana">Gana</div>
+  <div class="title-bombo">1 BOMBO</div>
+  <div class="title-sub">El Día del Padre</div>
+
+  <div class="prize-strip">
+    <div class="prize-name">Bombo Artesanal Plutón 7</div>
+    <div class="prize-sub">Hecho a mano en las Sierras Chicas de Córdoba</div>
+  </div>
+
+  <div class="chips">
+    <div class="chip">
+      <div class="chip-lbl">Pack 1</div>
+      <div class="chip-val">$5.000</div>
+      <div class="chip-desc">🎟️ 1 número</div>
+    </div>
+    <div class="chip">
+      <div class="chip-lbl">Mejor valor</div>
+      <div class="chip-val">$10.000</div>
+      <div class="chip-desc">🎟️🎟️🎟️ 3 números</div>
+    </div>
+    <div class="chip cyan">
+      <div class="chip-lbl">Sorteo</div>
+      <div class="chip-val">21/6</div>
+      <div class="chip-desc">Día del Padre</div>
+    </div>
+  </div>
+
+  <div class="countdown-section">
+    <div class="cd-label">⏳ Faltan</div>
+    <div class="countdown">
+      <div class="cd-box"><div class="cd-num" id="cd-d">00</div><div class="cd-lbl">Días</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-h">00</div><div class="cd-lbl">Hs</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-m">00</div><div class="cd-lbl">Min</div></div>
+      <div class="cd-box"><div class="cd-num" id="cd-s">00</div><div class="cd-lbl">Seg</div></div>
+    </div>
+  </div>
+
+  <div class="bonus">
+    <div class="bonus-title">🎉 Bonus — Chance extra gratis</div>
+    <div class="bonus-body">
+      ✅ Seguí <b>@pluton7bombos</b> en Instagram<br>
+      ✅ Compartí esta publicación<br>
+      ✅ Recomendá a un amigo<br>
+      <span class="hl">→ ¡Una chance extra sin cargo!</span>
+    </div>
+  </div>
+
+  <a class="btn-wa" href="https://wa.me/5492262618471?text=¡Hola!%20Quiero%20participar%20en%20el%20sorteo%20del%20Bombo%20Plutón%207%20🥁" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="white"><path d="M16 2C8.268 2 2 8.268 2 16c0 2.47.668 4.784 1.832 6.77L2 30l7.438-1.944A13.93 13.93 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2zm0 25.4a11.37 11.37 0 01-5.8-1.592l-.414-.247-4.414 1.156 1.176-4.3-.27-.44A11.4 11.4 0 014.6 16C4.6 9.706 9.706 4.6 16 4.6S27.4 9.706 27.4 16 22.294 27.4 16 27.4zm6.24-8.56c-.342-.17-2.024-1-2.34-1.112-.316-.114-.546-.17-.776.17-.23.342-.888 1.112-1.09 1.342-.2.228-.4.256-.742.086-.342-.17-1.444-.532-2.75-1.696-1.016-.906-1.702-2.024-1.902-2.366-.2-.342-.022-.526.15-.696.154-.152.342-.4.512-.6.17-.2.228-.342.342-.57.114-.228.056-.428-.028-.598-.086-.17-.776-1.872-1.064-2.562-.28-.672-.564-.58-.776-.59l-.66-.012c-.228 0-.598.086-.912.428-.314.342-1.2 1.172-1.2 2.858s1.228 3.316 1.4 3.546c.17.228 2.416 3.688 5.854 5.172.818.354 1.456.566 1.954.724.82.262 1.568.224 2.158.136.658-.098 2.024-.826 2.31-1.624.284-.8.284-1.484.2-1.626-.086-.14-.314-.228-.656-.4z"/></svg>
+    Quiero participar
+  </a>
+  <div class="hero-note">📲 Te enviamos los datos de pago por WhatsApp</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- GRILLA -->
+<div class="grid-section">
+  <div class="section-title">Números disponibles</div>
+  <div class="section-sub">Los números en gris ya fueron vendidos</div>
+
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot available"></div> Disponible</div>
+    <div class="leg-item"><div class="leg-dot taken"></div> Vendido</div>
+  </div>
+
+  <div class="num-grid" id="num-grid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-brand">Plutón 7 Bombos</div>
+  <div class="ft-quote">"La música es el alma del pueblo que no olvida sus raíces"</div>
+  <div class="ft-author">— Dúo Coplanacu</div>
+  <div class="ft-legal">Número ganador extraído al azar el 21/06/2026 y subido a las redes de @pluton7bombos ese mismo día</div>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════
+//  ▼▼▼  EDITÁ ESTE ARRAY CUANDO ALGUIEN COMPRA  ▼▼▼
+const VENDIDOS = [];
+//  Ejemplo: const VENDIDOS = [7, 14, 33, 88];
+// ═══════════════════════════════════════════════
+
+// Countdown
+function tick(){
+  const diff = new Date('2026-06-21T20:00:00-03:00') - new Date();
+  if(diff <= 0) return;
+  const pad = n => String(Math.floor(n)).padStart(2,'0');
+  document.getElementById('cd-d').textContent = pad(diff / 864e5);
+  document.getElementById('cd-h').textContent = pad(diff / 36e5 % 24);
+  document.getElementById('cd-m').textContent = pad(diff / 6e4 % 60);
+  document.getElementById('cd-s').textContent = pad(diff / 1e3 % 60);
+}
+tick(); setInterval(tick, 1000);
+
+// Grilla estática
+function buildGrid(){
+  const grid = document.getElementById('num-grid');
+  for(let i = 1; i <= 100; i++){
+    const el = document.createElement('div');
+    el.className = 'num-cell' + (VENDIDOS.includes(i) ? ' taken' : '');
+    el.textContent = i;
+    grid.appendChild(el);
+  }
+}
+buildGrid();
+</script>
+</body>
+</html>
